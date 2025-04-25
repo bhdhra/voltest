@@ -10,24 +10,16 @@ function Navbar({ isAuthenticated, onLogout }) {
           Voluntary Indian Organisations
         </h1>
       </div>
-      <a className='nav-links'>
-        <Link to="/welcome">Home</Link>
-      </a>
+      <Link className='nav-links' to="/welcome">Home</Link>
       {!isAuthenticated ? (
         <>
-          <a className='nav-links'>
-            <Link to="/login">Login</Link>
-          </a>
+          <Link className='nav-links' to="/login">Login</Link>
           <div>
-            <a className='nav-links'>
-              <Link to="/register">Register</Link>
-            </a>
+            <Link className='nav-links' to="/register">Register</Link>
           </div>
         </>
       ) : (
-        <a className='nav-links'>
-          <button onClick={onLogout}>Logout</button>
-          </a>
+        <button className='nav-links' onClick={onLogout}>Logout</button>
       )}
     </nav>
   );

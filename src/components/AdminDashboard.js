@@ -77,7 +77,7 @@ const AdminDashboard = () => {
           type="number"
           placeholder="Capacity"
           value={newTask.capacity}
-          onChange={(e) => setNewTask({ ...newTask, capacity: e.target.value })}
+          onChange={(e) => setNewTask({ ...newTask, capacity: Number(e.target.value) })}
         />
         <button type="submit">Create Event</button>
       </form>

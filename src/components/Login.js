@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../utils/axios';
 import './Auth.css';
 import { useNavigate } from 'react-router-dom';
 // Correct named import for jwt-decode
@@ -31,9 +31,9 @@ function Login({ onLogin }) {
 
       // Redirect based on role
       if (userRole === 'admin') {
-        navigate('/user-dashboard');
-      } else if (userRole === 'User') {
         navigate('/admin-dashboard');
+      } else if (userRole === 'User') {
+        navigate('/user-dashboard');
       } else {
         navigate('/'); // Default route if the role is not recognized
       }

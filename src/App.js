@@ -39,12 +39,24 @@ const App = () => {
   }, [navigate]);
 
   const handleLogin = () => {
-    setIsAuthenticated(true);
-    // After login, you can directly navigate to the appropriate dashboard
-    if (role === 'admin') {
-      navigate('/admin-dashboard');
-    } else {
-      navigate('/user-dashboard');
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token); // Decode the token
+        const userRole = decodedToken.role; // Extract role from the decoded token
+        setIsAuthenticated(true);
+        setRole(userRole);
+
+        // Navigate based on the role
+        if (userRole === 'admin') {
+          navigate('/admin-dashboard');
+        } else {
+          navigate('/user-dashboard');
+        }
+      } catch (err) {
+        console.error("Token decoding failed during login:", err);
+        setIsAuthenticated(false);
+      }
     }
   };
 
