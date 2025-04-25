@@ -1,0 +1,32 @@
+/* Welcome.css */
+.welcome-container {
+    padding: 100px 20px;
+    text-align: center;
+    background-color: #f0f4f8;
+    color: #333;
+    min-height: 70vh;
+  }
+  
+  .welcome-container h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .welcome-container p {
+    font-size: 1.2rem;
+  }
+
+  .welcome-container {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.carousel-wrapper {
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+.carousel .legend {
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 1rem;
+}

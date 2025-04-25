@@ -1,0 +1,30 @@
+/* src/components/Dashboard.css */
+.dashboard {
+    padding: 20px;
+  }
+  
+  .task-card {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .task-card h4 {
+    margin: 0 0 10px;
+  }
+  
+  .task-card button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #0077cc;
+    border: none;
+    border-radius: 4px;
+    color: white;
+  }
+  
+  .task-card button:hover {
+    background-color: #005fa3;
+  }
+  

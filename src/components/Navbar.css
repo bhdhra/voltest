@@ -1,0 +1,41 @@
+/* src/components/Navbar.css */
+.navbar {
+    background-color: #0077cc;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-title {
+    font-size: 40px;
+    font-weight: bold;
+  }
+  
+  .nav-links a,
+.nav-links button {
+  color: white;
+  background-color: transparent;
+  border: 2px solid white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-links a:hover,
+.nav-links button:hover {
+  background-color: white;
+  color: #202020;
+  font-size: 15px;
+  font-style: bold;
+}
+
+  .navbar h1 {
+    margin: 15px;
+    color: #ffffff;
+    font-weight: bold;
+  }

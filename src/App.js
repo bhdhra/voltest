@@ -1,25 +1,79 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, BrowserRouter, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';  // Corrected import
+import Navbar from './components/Navbar';
+import UserDashboard from './components/UserDashboard';
+import AdminDashboard from './components/AdminDashboard'; // Assuming you have an AdminDashboard component
+import Login from './components/Login';
+import Register from './components/Register';
+import Footer from './components/Footer';
+import Welcome from './components/Welcome';
 
-function App() {
+const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [role, setRole] = useState(null); // Track role
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);  // Decode the token
+        setIsAuthenticated(true);
+        
+        const userRole = decodedToken.role;  // Extract role from the decoded token
+        setRole(userRole);  // Store the role in the state
+
+        // Redirect based on the role
+        if (userRole === 'admin') {
+          navigate('/admin-dashboard');
+        } else {
+          navigate('/user-dashboard');
+        }
+      } catch (err) {
+        console.error("Token decoding failed:", err);
+        setIsAuthenticated(false);
+      }
+    }
+  }, [navigate]);
+
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+    // After login, you can directly navigate to the appropriate dashboard
+    if (role === 'admin') {
+      navigate('/admin-dashboard');
+    } else {
+      navigate('/user-dashboard');
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+    navigate('/login');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="/Welcome" element={<Welcome />} />
+        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/user-dashboard" element={<UserDashboard />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} /> {/* Admin Dashboard Route */}
+      </Routes>
+      <Footer />
+    </>
   );
-}
+};
 
-export default App;
+const AppWithRouter = () => (
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+
+export default AppWithRouter;
